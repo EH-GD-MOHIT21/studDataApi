@@ -1,0 +1,172 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APIWALA SUPPORT</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+
+    <style>
+        .maincontainer {
+            width: 500px;
+            position: absolute;
+            /* background: ; */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 20px;
+            box-shadow: 5px 9px 10px #888888;
+        }
+        
+        .maincontainer input {
+            display: block;
+            text-align: center;
+            width: 400px;
+            text-align: center;
+            margin: 10px auto;
+            height: 40px;
+        }
+        
+        .maincontainer button {
+            display: block;
+            margin: 20px auto;
+        }
+        
+        .maincontainer h4 {
+            text-align: center;
+            margin: 10px auto;
+            margin-bottom: 20px;
+        }
+        
+        .second {
+            display: none;
+        }
+        
+        @media(max-width:500px) {
+            .maincontainer {
+                width: 100%;
+            }
+            .maincontainer input {
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- nav bar here -->
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">APIWALA</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+            <!-- scroll spy code here -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/#apiwala_home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/#apiwala_pricing">Pricing</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  more
+                </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="/#about_apiwala">About us</a></li>
+                            <li><a class="dropdown-item" href="/#contact_apiwala">Contact us</a></li>
+                            <!-- <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li> -->
+                        </ul>
+                    </li>
+                </ul>
+                <!-- scroll spy ends here -->
+                <form class="d-flex justify-content-between">
+                    {% if user.is_authenticated %}
+                    <button type="button" id="logmeoutbtn" class="btn btn-outline-light">
+                        Not {{user.username}} ? Logout
+                      </button> {% else %}
+                    <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Login/SignUp
+                      </button> {% endif %}
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <!-- navbar ends -->
+
+
+    <!-- login model -->
+    <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="0" class="scrollspy-example" tabindex="0">
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Welcome User! to APIWALA</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body first" id="first">
+                        <form action="/login" method="POST">
+                            {% csrf_token %}
+                            <input type="text" class="mx-auto p-1 d-block mt-2 w-100 text-center" name="username" placeholder="Enter Username">
+                            <input type="password" class="mx-auto p-1 d-block mt-2 w-100 text-center" placeholder="Enter Password" name="password">
+                            <a href="/resetpassword" class="d-block mt-2">Forgot Your Password?</a>
+                            <button type="submit" class="btn btn-primary" id="gogogo">Login</button>
+                        </form>
+                    </div>
+                    <div class="modal-body second" id="second">
+                        <form action="/signup" method="POST">
+                            {% csrf_token %}
+                            <input type="text" class="mx-auto p-1 d-block mt-2 w-100 text-center" name="username" placeholder="Enter Username">
+                            <input type="password" name="password" class="mx-auto p-1 d-block mt-2 w-100 text-center" placeholder="Enter Password">
+                            <input type="email" class="mx-auto p-1 d-block mt-2 w-100 text-center" name="mailid" placeholder="Enter Mail Id">
+                            <button type="submit" class="btn btn-primary" id="gosetgo">Signup</button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="sign-btn">SignUp Here</button>
+                        <button type="button" class="btn btn-primary" id="log-btn">Login</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- login model ends here -->
+
+
+        <form action="/checkusernupdate" method="POST">
+            {% csrf_token %}
+            <div class="maincontainer bg-success">
+                <h4>Please Verify the Account Belongs to You.</h4>
+                <input type="text" placeholder="Enter Your Username" name="username">
+                <input type="text" placeholder="Enter Your API KEY only" name="api">
+                <input type="password" placeholder="new password here" name="pass">
+                <input type="password" placeholder="new repassword here" name="cpass">
+                <button class="btn btn-outline-warning" type="submit">Procced</button>
+            </div>
+        </form>
+
+        {% for message in messages %}
+        <script>
+            alert('{{message}}')
+        </script>
+        {% endfor %}
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+<script src="{% static 'js/model.js' %}"></script>
+
+</html>

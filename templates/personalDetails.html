@@ -1,0 +1,306 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <title>Personal Page @ APIWALA</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital@0;1&display=swap" rel="stylesheet">
+
+    <style>
+        nav,
+        .plans,
+        .permissions,
+        .bottommmanager,
+        footer h3 {
+            font-family: 'Crimson Text', serif;
+        }
+        
+        .plans {
+            width: 400px;
+            background: #b3bcf5;
+            text-align: center;
+            padding: 20px;
+            margin-top: 10px;
+            border-radius: 10px;
+        }
+        
+        .permissions {
+            width: 400px;
+            background: #b3bcf5;
+            text-align: center;
+            margin-top: 10px;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        
+        @media(max-width:850px) {
+            .permissions,
+            .plans {
+                width: 98%;
+            }
+        }
+        
+        .basicinfo {
+            text-align: center;
+            background: #b3bcf5;
+            padding: 20px;
+            word-break: break-all;
+            width: 100%;
+            border-radius: 10px;
+        }
+        
+        .tocenter {
+            display: block;
+            width: 98%;
+            margin: auto;
+            text-align: center;
+            margin-top: 10px;
+            border-radius: 10px;
+        }
+        
+        footer {
+            margin-top: 10px;
+        }
+        
+        .restelms {
+            display: flex;
+            justify-content: space-around;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+        .offcanvas{
+            height:150px;
+        }
+        @media(max-width:450px){
+            .offcanvas{
+                height:200px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- nav bar here -->
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">APIWALA</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+            <!-- scroll spy code here -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/#apiwala_home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/#apiwala_pricing">Pricing</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  more
+                </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="/#about_apiwala">About us</a></li>
+                            <li><a class="dropdown-item" href="/#contact_apiwala">Contact us</a></li>
+                            <!-- <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li> -->
+                        </ul>
+                    </li>
+                </ul>
+                <!-- scroll spy ends here -->
+                <form class="d-flex justify-content-between">
+                    {% if user.is_authenticated %}
+                    <button type="button" id="logmeoutbtn" class="btn btn-outline-light">
+                        Not {{user.username}} ? Logout
+                      </button> {% else %}
+                    <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Login/SignUp
+                      </button> {% endif %}
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <!-- navbar ends -->
+
+
+    <!-- login model
+    <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="0" class="scrollspy-example" tabindex="0"> -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Welcome User! to APIWALA</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body first" id="first">
+                    <form action="/login" method="POST">
+                        {% csrf_token %}
+                        <input type="text" class="mx-auto p-1 d-block mt-2 w-100 text-center" name="username" placeholder="Enter Username">
+                        <input type="password" class="mx-auto p-1 d-block mt-2 w-100 text-center" placeholder="Enter Password" name="password">
+                        <a href="/resetpassword" class="d-block mt-2">Forgot Your Password?</a>
+                        <button type="submit" class="btn btn-primary" id="gogogo">Login</button>
+                    </form>
+                </div>
+                <div class="modal-body second" id="second">
+                    <form action="/signup" method="POST">
+                        {% csrf_token %}
+                        <input type="text" class="mx-auto p-1 d-block mt-2 w-100 text-center" name="username" placeholder="Enter Username">
+                        <input type="password" name="password" class="mx-auto p-1 d-block mt-2 w-100 text-center" placeholder="Enter Password">
+                        <input type="email" class="mx-auto p-1 d-block mt-2 w-100 text-center" name="mailid" placeholder="Enter Mail Id">
+                        <button type="submit" class="btn btn-primary" id="gosetgo">Signup</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="sign-btn">SignUp Here</button>
+                    <button type="button" class="btn btn-primary" id="log-btn">Login</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- login model ends here -->
+
+
+    <div class="bottommmanager">
+        <div class="tocenter">
+            <div class="basicinfo">
+                <h2>Username: <span style="color:green">{{data.username}}</span></h2>
+                <h2>Your APIKey: <span style="color:red">xx{{data.username}}xxx</span></h2>
+                <h2>Limit Remaining: <span style="color:red">{{data.limit}}</span></h2>
+            </div>
+        </div>
+        <div class="restelms">
+            <div class="plans">
+                <h2 class="title">
+                    Active Plans
+                </h2>
+                {% if data.stype_obj.free_plan %}
+                <h2 style="color:green">🥉 Plan ✅</h2>
+                {% else %}
+                <h2 style="color:green">🥉 Plan ❌</h2>
+                {% endif %} {% if data.stype_obj.silver_plan %}
+                <h2 style="color:gray">🥈 Plan ✅</h2>
+                {% else %}
+                <h2 style="color:gray">🥈 Plan ❌</h2>
+                {% endif %} {% if data.stype_obj.gold_plan %}
+                <h2 style="color:yellow">🥇 Plan ✅</h2>
+                {% else %}
+                <h2 style="color:yellow">🥇 Plan ❌</h2>
+                {% endif %} {% if data.stype_obj.diamond_plan %}
+                <h2 style="color:palevioletred">💎 Plan ✅</h2>
+                {% else %}
+                <h2 style="color:palevioletred">💎 Plan ❌</h2>
+                {% endif %}
+            </div>
+
+            <div class="permissions">
+                <h2 class="title">
+                    Permissions
+                </h2>
+                {% if data.api_permission_obj.get_api_permission %}
+                <h2 style="color:green">Get Api Permission ✅</h2>
+                {% else %}
+                <h2 style="color:green">Get Api Permission ❌</h2>
+                {% endif %} {% if data.api_permission_obj.post_api_permission %}
+                <h2 style="color:red">Post Api Permission ✅</h2>
+                {% else %}
+                <h2 style="color:red">Post Api Permission ❌</h2>
+                {% endif %} {% if data.api_permission_obj.put_api_permission %}
+                <h2 style="color:red">Put Api Permission ✅</h2>
+                {% else %}
+                <h2 style="color:red">Put Api Permission ❌</h2>
+                {% endif %} {% if data.api_permission_obj.patch_api_permission %}
+                <h2 style="color:red">Patch Api Permission ✅</h2>
+                {% else %}
+                <h2 style="color:red">Patch Api Permission ❌</h2>
+                {% endif %} {% if data.api_permission_obj.delete_api_permission %}
+                <h2 style="color:red">Delete Api Permission ✅</h2>
+                {% else %}
+                <h2 style="color:red">Delete Api Permission ❌</h2>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- footer here -->
+
+    <footer class="bg-success" id="contact_apiwala">
+        <h3>APIWALA</h3>
+        <div class="mainfooter">
+            <div class="firstchild">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid maxime, ipsa praesentium expedita provident cupiditate vero dolorum tempore ducimus, neque, nam commodi! Delectus aliquam beatae accusantium odit recusandae optio, molestias
+                    veritatis. Minus mollitia dolores quam at, magnam nihil amet quo.</p>
+            </div>
+            <div class="footerlinks">
+                <h3>Site Info</h3>
+                <p><a href="https://www.askideas.com/media/39/Donkey-With-Big-Smiling-Funny-Face-Image.jpg" target="_blank">Privacy Policy</a></p>
+                <p><a href="#">Contact Us</a></p>
+                <p><a href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">How to?</a></p>
+                <p><a href="/showmyapi">Show my API</a></p>
+            </div>
+            <div class="Social links">
+                <h3>Social Links</h3>
+                <p><a href="https://github.com/EH-GD-MOHIT21" target="_blank">Github</a></p>
+                <p><a href="https://instagram.com/i_m_mohit021" target="_blank">InstaGram</a></p>
+                <p><a href="https://www.youtube.com/channel/UC41ksagdFtAUKfSsNzGubhA" target="_blank">Youtube</a></p>
+                <p><a href="https://teekhimirchi.in/wp-content/uploads/2016/11/Abhishek-Bachchan-Babaji-Ka-Thullu.jpg" target="_blank">Linkedin</a></p>
+            </div>
+        </div>
+        Copyright &copy; 2021 APIWALA | All Rights Reserved
+    </footer>
+
+    <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+        <div class="offcanvas-header">
+            <h5 id="offcanvasTopLabel">How to use api key</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <h4>The link for api address should be http://smvduapi.herokuapp.com/api/checkuser/
+                <-apikey->
+            </h4>
+        </div>
+    </div>
+
+    {% for message in messages %}
+    <script>alert('{{message}}')</script>
+    {% endfor %}
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
+<script>
+    {% if message %}
+    alert('{{message}}') 
+    {% endif %}
+    try{
+    document.getElementById("logmeoutbtn").addEventListener('click',function(){
+        window.location.href = "/logmeout"
+    })
+    }
+    catch(err){
+        console.log()
+    }
+
+    document.getElementById("moreinfo").addEventListener('click',function(){
+        window.location.href = "#pricing"
+    })
+</script>
+
+
+</html>

@@ -1,0 +1,246 @@
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital@0;1&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.second {
+    display: none;
+}
+
+#Procced {
+    position: absolute;
+    left: 2%;
+}
+
+.boundry {
+    overflow: hidden;
+}
+
+.maincontent {
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    overflow: hidden;
+}
+
+#headcenter h3 {
+    color: #e74c3c;
+}
+
+#xxxtra {
+    color: #27ae60;
+}
+
+.navbar-brand {
+    padding-left: 15px;
+}
+
+.pricecontainer {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.planscontainer {
+    position: relative;
+    margin: 20px;
+    width: 300px;
+    text-align: center;
+    overflow: hidden;
+    border-radius: 5px;
+    box-shadow: 5px 9px 10px #888888;
+}
+
+#pricing,
+.themeHeader {
+    margin-top: 20px;
+    text-align: center;
+    color: green;
+}
+
+.strike {
+    text-decoration: line-through;
+}
+
+.customcolor {
+    background: palevioletred;
+}
+
+.labeloff {
+    position: absolute;
+    width: 20px;
+    height: 80px;
+    background: red;
+    top: -9%;
+    right: 3%;
+    transform: rotate(-45deg);
+}
+
+.textRotate {
+    transform: translate(-2%, 80%) rotate(84deg);
+    color: white;
+}
+
+.ordernow {
+    margin: 20px auto;
+}
+
+.aboutusmain {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    /* background: #a6e8f0; */
+    padding-bottom: 20px;
+}
+
+.personcontainer {
+    margin: 20px;
+    width: 90%;
+    text-align: justify;
+    background: #bfeef4;
+    box-shadow: 0px 0px 20px rgb(0 0 0 / 50%);
+}
+
+.person-name {
+    text-align: center;
+    padding-top: 10px;
+}
+
+.personcontainer p {
+    padding: 20px;
+}
+
+.pic1 {
+    text-align: center;
+}
+
+.serviceContainer ul li {
+    font-size: 18px;
+    line-height: 1.6rem;
+    text-align: justify;
+    margin: 20px;
+}
+
+footer {
+    display: block;
+    text-align: center;
+    /* background: black; */
+    color: white;
+}
+
+.mainfooter {
+    display: flex;
+    justify-content: space-around;
+}
+
+.firstchild {
+    width: 40%;
+    text-align: justify;
+}
+
+footer a {
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+}
+
+footer a:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+@media(max-width:700px) {
+    .firstchild {
+        display: block;
+        width: 98%;
+        padding: 10px;
+    }
+    .mainfooter {
+        display: block;
+    }
+}
+
+footer h3 {
+    padding: 15px;
+}
+
+.underline {
+    width: 200px;
+    height: 4px;
+    background: gray;
+    margin: auto;
+    margin-top: 10px;
+}
+
+.less {
+    width: 80px;
+}
+
+.xless {
+    width: 120px;
+}
+
+.titlechangeablecontainer {
+    width: 400px;
+    height: 200px;
+    background: rgba(255, 255, 255, 0.7);
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 20px;
+}
+
+.titlechangeablecontainer h3 {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.titlechangeablecontainer button {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.person-bio,
+.person-name,
+.serviceContainer,
+footer h3 {
+    font-family: 'Crimson Text', serif;
+}
+
+.person-bio {
+    font-size: 18px;
+}
+
+.serviceContainer ul li {
+    font-size: 20px;
+    line-height: 1.7rem;
+}
+
+@media(max-width:400px) {
+    .titlechangeablecontainer {
+        width: 98%;
+    }
+    .personcontainer {
+        width: 98%;
+    }
+}
+
+.offcanvas-body h4 {
+    word-break: break-all;
+}
